@@ -1,0 +1,9 @@
+---
+source:
+  type: MySQL # currently only MySQL is supported
+  host: 'localhost'
+  port: 3306
+  username: ''
+  password: ''
+  schema: 'phpbb'
+  table_prefix: 'phpbb_'
