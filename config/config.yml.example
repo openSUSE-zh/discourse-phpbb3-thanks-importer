@@ -7,3 +7,8 @@ source:
   password: ''
   schema: 'phpbb'
   table_prefix: 'phpbb_'
+dest:
+  host: 'localhost'
+  db: 'discourse'
+  username: 'discourse'
+  password: ''

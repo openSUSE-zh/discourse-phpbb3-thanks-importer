@@ -1,7 +1,4 @@
 require 'mysql2'
-require 'suse_typo'
-require 'latincjk'
-require 'csv'
 
 module PhpbbThanks
   # extract thanks from phpbb3 mysql database
@@ -19,9 +16,9 @@ module PhpbbThanks
 
     def fill
       data = read_data_from_thanks_table
-      CSV.open('thanks.csv', 'w') do |csv|
+      open('thanks.txt', 'w:UTF-8') do |t|
         data.each do |d|
-          csv << d
+          t.write "#{d}\n"
         end
       end
     end
@@ -34,25 +31,15 @@ module PhpbbThanks
       thanks_data.each do |row|
         # post_id, poster_id, user_id, topic_id, forum_id, thanks_time
         # 4936, 2, 280, 591, 19, 1366386854
-        post_title = get_post_title(row['post_id'])
         receiver = get_username(row['poster_id'])
         giver = get_username(row['user_id'])
         topic_title = get_topic_title(row['topic_id'])
         forum_name = get_forum_name(row['forum_id'])
         thanks_time = get_thanks_time(row['thanks_time'])
-        data << [post_title, receiver, giver,
+        data << [row['post_id'], receiver, giver,
                  topic_title, forum_name, thanks_time]
       end
       data
-    end
-
-    def get_post_title(id)
-      posts = @mysql.query("SELECT post_subject FROM #{@source_ostruct.table_prefix}posts WHERE post_id=\"#{id}\"")
-      data = []
-      posts.each do |row|
-        data << row['post_subject']
-      end
-      data[0]
     end
 
     def get_username(id)
