@@ -53,6 +53,8 @@ module PhpbbThanks
     end
 
     def get_user_id(username)
+      # use system id if receiver/giver was deleted from phpbb side
+      return "-1" if username.nil?
       ids = @con.exec "SELECT id FROM users WHERE name=\'#{username}\'"
       data = []
       ids.each do |row|
