@@ -5,7 +5,7 @@ require 'phpbb3_thanks/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "phpbb3_thanks"
-  spec.version       = PHPBB3_Thanks::VERSION
+  spec.version       = PhpbbThanks::VERSION
   spec.authors       = ["marguerite"]
   spec.email         = ["i@marguerite.su"]
 
@@ -31,6 +31,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "mysql2", "~> 0.4"
+  spec.add_runtime_dependency "csv", "~> 0.0"
+  spec.add_runtime_dependency "latincjk", "~> 0.0"
+  spec.add_runtime_dependency "suse_typo", "~> 0.0"
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
