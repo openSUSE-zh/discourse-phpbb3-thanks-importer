@@ -33,13 +33,13 @@ module PhpbbThanks
     def map(data)
       # map the thanks data with the IDs in the postgresql db
       data.map! do |i|
-        # post_text, poster_id, user_id, topic_title, forum_name, thanks_time
+        # post_text, poster_id, user_id, thanks_time
         post_id = get_post_id(i[0])
         receiver = get_user_id(i[1])
         giver = get_user_id(i[2])
-        topic_id = get_topic_id(i[3])
-        forum_id = get_forum_id(i[4])
-        [post_id, receiver, giver, topic_id, forum_id, i[5]]
+        topic_id = get_topic_id(post_id)
+        category_id = get_forum_id(topic_id)
+        [post_id, receiver, giver, topic_id, category_id, i[3]]
       end
     end
 
@@ -53,7 +53,7 @@ module PhpbbThanks
     end
 
     def get_user_id(username)
-      ids = @con.exec "SELECT id FROM users WHERE username_lower=\'#{username}\'"
+      ids = @con.exec "SELECT id FROM users WHERE name=\'#{username}\'"
       data = []
       ids.each do |row|
         data << row['id']
@@ -61,17 +61,17 @@ module PhpbbThanks
       data[0]
     end
 
-    def get_topic_id(title)
-      ids = @con.exec "SELECT id FROM topics WHERE title=\'#{@con.escape_string(title)}\'"
+    def get_topic_id(post_id)
+      ids = @con.exec "SELECT topic_id FROM posts WHERE id=\'#{post_id}\'"
       data = []
-      ids.each { |row| data << row['id'] }
+      ids.each { |row| data << row['topic_id'] }
       data[0]
     end
 
-    def get_forum_id(name)
-      ids = @con.exec "SELECT id FROM categories WHERE name=\'#{name}\'"
+    def get_forum_id(topic_id)
+      ids = @con.exec "SELECT category_id FROM topics WHERE id=\'#{topic_id}\'"
       data = []
-      ids.each { |row| data << row['id'] }
+      ids.each { |row| data << row['category_id'] }
       data[0]
     end
   end

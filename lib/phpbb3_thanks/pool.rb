@@ -33,38 +33,17 @@ module PhpbbThanks
         # 4936, 2, 280, 591, 19, 1366386854
         receiver = get_username(row['poster_id'])
         giver = get_username(row['user_id'])
-        topic_title = get_topic_title(row['topic_id'])
-        forum_name = get_forum_name(row['forum_id'])
         thanks_time = get_thanks_time(row['thanks_time'])
-        data << [row['post_id'], receiver, giver,
-                 topic_title, forum_name, thanks_time]
+        data << [row['post_id'], receiver, giver, thanks_time]
       end
       data
     end
 
     def get_username(id)
-      users = @mysql.query("SELECT username_clean FROM #{@source_ostruct.table_prefix}users WHERE user_id=\"#{id}\"")
+      users = @mysql.query("SELECT username FROM #{@source_ostruct.table_prefix}users WHERE user_id=\"#{id}\"")
       data = []
       users.each do |row|
-        data << row['username_clean']
-      end
-      data[0]
-    end
-
-    def get_topic_title(id)
-      topics = @mysql.query("SELECT topic_title FROM #{@source_ostruct.table_prefix}topics WHERE topic_id=\"#{id}\"")
-      data = []
-      topics.each do |row|
-        data << row['topic_title']
-      end
-      data[0]
-    end
-
-    def get_forum_name(id)
-      forums = @mysql.query("SELECT forum_name FROM #{@source_ostruct.table_prefix}forums WHERE forum_id=\"#{id}\"")
-      data = []
-      forums.each do |row|
-        data << row['forum_name']
+        data << row['username']
       end
       data[0]
     end
