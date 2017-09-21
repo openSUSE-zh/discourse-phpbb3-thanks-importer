@@ -52,13 +52,12 @@ module PhpbbThanks
       data[0]
     end
 
-    def get_user_id(username)
-      # use system id if receiver/giver was deleted from phpbb side
-      return "-1" if username.nil?
-      ids = @con.exec "SELECT id FROM users WHERE name=\'#{username}\'"
+    def get_user_id(id)
+      ids = @con.exec "SELECT user_id FROM user_custom_fields WHERE name='import_id' AND value=\'#{id}\'"
       data = []
+      return "-1" if ids.cmd_tuples.zero?
       ids.each do |row|
-        data << row['id']
+        data << row['user_id']
       end
       data[0]
     end

@@ -31,21 +31,10 @@ module PhpbbThanks
       thanks_data.each do |row|
         # post_id, poster_id, user_id, topic_id, forum_id, thanks_time
         # 4936, 2, 280, 591, 19, 1366386854
-        receiver = get_username(row['poster_id'])
-        giver = get_username(row['user_id'])
         thanks_time = get_thanks_time(row['thanks_time'])
-        data << [row['post_id'], receiver, giver, thanks_time]
+        data << [row['post_id'], row['poster_id'], row['user_id'], thanks_time]
       end
       data
-    end
-
-    def get_username(id)
-      users = @mysql.query("SELECT username FROM #{@source_ostruct.table_prefix}users WHERE user_id=\"#{id}\"")
-      data = []
-      users.each do |row|
-        data << row['username']
-      end
-      data[0]
     end
 
     def get_thanks_time(str)
