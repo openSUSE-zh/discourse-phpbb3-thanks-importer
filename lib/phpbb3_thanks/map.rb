@@ -11,13 +11,7 @@ module PhpbbThanks
                         :user => @struct.username,
                         :host => @struct.host,
                         :password => @struct.password
-      @data = []
-      open(txt, 'r:UTF-8') do |f|
-        f.each_line do |l|
-          @data << eval(l.strip)
-        end
-      end
-      @data = map(@data)
+      @data = map(PhpbbThanks::Pool.new("config").get)
     end
 
     def write

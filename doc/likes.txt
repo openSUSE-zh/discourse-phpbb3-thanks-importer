@@ -1,0 +1,38 @@
+This documentation explains how discourse likes works.
+
+When user clicks the like (heart) button, it will create a type-2 post action (table: post_actions).
+
+And the post get the like_count, like_score, score and percent_rank calculated (table: posts)
+
+then topic_users and topic get their likes calculated, and then top_topics
+
+then user_actions and user_stats get updated.
+
+then directory_items, given_daily_likes get calculated.
+
+then badge_posts get updated
+
+How like score is calculated?
+
+If a user is admin or moderator, his likes counts for 3, else 1
+
+How total score is calculated?
+
+5 * reply_count + 15 * like_score + 5 * incoming_link_count + 2 * bookmark_count
++ 0.05 * avg_time + 0.2 * reads
+
+How percent_rank is calculated?
+
+select topic_id, and order by score desc.
+
+rank them, eg:
+
+0.75 0.65 0.65 0.2 0.2 0
+
+1 2 2 4 4 6
+
+formula = (rank - 1) / (total - 1)
+
+How topic score is calculated?
+
+the average score of all post scores of this topic_id

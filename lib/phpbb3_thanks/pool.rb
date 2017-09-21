@@ -14,13 +14,8 @@ module PhpbbThanks
                                   password: @source_ostruct.password)
     end
 
-    def fill
-      data = read_data_from_thanks_table
-      open('thanks.txt', 'w:UTF-8') do |t|
-        data.each do |d|
-          t.write "#{d}\n"
-        end
-      end
+    def get
+      read_data_from_thanks_table
     end
 
     private
