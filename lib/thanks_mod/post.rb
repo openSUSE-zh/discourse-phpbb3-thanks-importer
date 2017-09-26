@@ -15,7 +15,7 @@ module ThanksMod
 
     def percent_rank
       q = @con.exec("SELECT id,score FROM posts WHERE topic_id='#{@topic}' ORDER BY score DESC")
-      r = rank(q, @id)
+      r = ThanksMod::PostCalculator.rank(q, @id)
       size = q.cmdtuples
       (r - 1) / (size - 1).to_f
     end
@@ -37,7 +37,7 @@ module ThanksMod
 
     private
 
-    def rank(query, id)
+    def self.rank(query, id)
       values = query.values
       ranks = []
       i = 1
