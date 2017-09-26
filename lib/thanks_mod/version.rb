@@ -1,3 +1,3 @@
-module PhpbbThanks
+module ThanksMod
   VERSION = '1.0.0'.freeze
 end

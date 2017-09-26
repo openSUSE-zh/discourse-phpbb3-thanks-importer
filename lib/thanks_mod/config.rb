@@ -1,7 +1,7 @@
 require 'yaml'
 require 'ostruct'
 
-module PhpbbThanks
+module ThanksMod
   # Parse yaml config
   class Config
     attr_reader :hash
@@ -9,19 +9,7 @@ module PhpbbThanks
       path = File.expand_path(File.dirname(__FILE__)) + '/../../config/'
       file = path + conf + '.yml'
       raise 'no such config' unless File.exist?(file)
-      @hash = to_struct(YAML.safe_load(open(file, 'r:UTF-8').read))
-    end
-
-    private
-
-    def to_struct(hash)
-      hash.each do |k, v|
-        s = OpenStruct.new
-        v.each do |m, n|
-          s[m] = n
-        end
-        hash[k] = s
-      end
+      @hash = YAML.safe_load(open(file, 'r:UTF-8').read)
     end
   end
 end

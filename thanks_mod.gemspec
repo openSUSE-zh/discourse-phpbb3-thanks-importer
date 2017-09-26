@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'phpbb3_thanks/version'
+require  'thanks_mod/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "phpbb3_thanks"
-  spec.version       = PhpbbThanks::VERSION
+  spec.name          = "thanks_mod"
+  spec.version       = ThanksMod::VERSION
   spec.authors       = ["marguerite"]
   spec.email         = ["i@marguerite.su"]
 
@@ -30,8 +30,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency "pg", "~> 0.20.0"
   spec.add_runtime_dependency "mysql2", "~> 0.4"
-  spec.add_runtime_dependency "csv", "~> 0.0"
   spec.add_runtime_dependency "latincjk", "~> 0.0"
   spec.add_runtime_dependency "suse_typo", "~> 0.0"
   spec.add_development_dependency "bundler", "~> 1.13"

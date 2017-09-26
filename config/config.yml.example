@@ -1,14 +1,12 @@
 ---
-source:
-  type: MySQL # currently only MySQL is supported
+mysql2:
   host: 'localhost'
   port: 3306
   username: ''
   password: ''
-  schema: 'phpbb'
-  table_prefix: 'phpbb_'
-dest:
+  database: 'phpbb'
+pg:
   host: 'localhost'
-  db: 'discourse'
-  username: 'discourse'
+  dbname: 'discourse'
+  user: 'discourse'
   password: ''

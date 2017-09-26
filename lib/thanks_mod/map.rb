@@ -1,17 +1,9 @@
-require 'pg'
-
-module PhpbbThanks
+module ThanksMod
   # map thanks data from phpbb to discourse's postgresql
   class Map
-    attr_reader :data
-    def initialize(config, txt)
-      @config = PhpbbThanks::Config.new(config).hash
-      @struct = @config['dest']
-      @con = PG.connect :dbname => @struct.db,
-                        :user => @struct.username,
-                        :host => @struct.host,
-                        :password => @struct.password
-      @data = map(PhpbbThanks::Pool.new("config").get)
+    def initialize(con, data)
+      @con = con
+      @data = map(data)
     end
 
     def write
@@ -20,6 +12,10 @@ module PhpbbThanks
           f.write "#{i}\n"
         end
       end
+    end
+
+    def get
+      @data
     end
 
     private

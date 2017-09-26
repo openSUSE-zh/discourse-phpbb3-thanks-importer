@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-
-$LOAD_PATH.push(File.expand_path(File.dirname(__FILE__) + '/../lib'))
-
-require 'phpbb3_thanks'
-
-config = ARGV[0] || "config"
-
-PhpbbThanks::Map.new(config, "test.txt").write

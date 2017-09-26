@@ -2,6 +2,13 @@
 
 $LOAD_PATH.push(File.expand_path(File.dirname(__FILE__) + '/../lib'))
 
-require 'phpbb3_thanks'
+require 'thanks_mod'
 
+config = ARGV[0] || "config"
 
+mysql = ThanksMod::DB.new(config).mysql2
+pg = ThanksMod::DB.new(config).pg
+
+thanks_data = ThanksMod::Pool.new(mysql).get
+
+mapped = ThanksMod::Map.new(pg, thanks_data).write

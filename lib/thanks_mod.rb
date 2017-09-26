@@ -1,0 +1,5 @@
+require 'thanks_mod/config.rb'
+require 'thanks_mod/db.rb'
+require 'thanks_mod/map.rb'
+require 'thanks_mod/pool.rb'
+require 'thanks_mod/version.rb'
