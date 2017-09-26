@@ -1,5 +1,4 @@
 require 'yaml'
-require 'ostruct'
 
 module ThanksMod
   # Parse yaml config
