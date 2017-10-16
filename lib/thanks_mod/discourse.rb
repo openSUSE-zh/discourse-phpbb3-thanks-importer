@@ -13,7 +13,7 @@ module ThanksMod
     def push
       @data.each do |i|
         # update post_actions table
-        #@con.exec "INSERT INTO post_actions (post_id, user_id, post_action_type_id, created_at, updated_at, staff_took_action, targets_topic)VALUES('#{i[0]}', '#{i[2]}', '2', '#{i[5]}', '#{i[5]}', 'f', 'f')"
+        #@con.exec "INSERT INTO post_actions (post_id, user_id, post_action_type_id, created_at, updated_at, staff_took_action, targets_topic) VALUES('#{i[0]}', '#{i[2]}', '2', '#{i[5]}', '#{i[5]}', 'f', 'f')"
 
         # update posts table
         post_calculator = ThanksMod::PostCalculator.new(@con, i[0], i[1], i[3])
@@ -40,6 +40,16 @@ module ThanksMod
         #@con.exec "UPDATE top_topics SET yearly_likes_count='#{topic_likes}',monthly_likes_count='#{topic_likes}',weekly_likes_count='#{topic_likes}',daily_likes_count='#{topic_likes}',quarterly_likes_count='#{topic_likes}' WHERE topic_id='#{i[3]}'"
         #@con.exec "UPDATE top_topics SET yearly_op_likes_count='#{op_likes}',monthly_op_likes_count='#{op_likes}',weekly_op_likes_count='#{op_likes}',daily_op_likes_count='#{op_likes}',quarterly_op_likes_count='#{op_likes}' WHERE topic_id='#{i[3]}'" 
         #@con.exec "UPDATE top_topics SET daily_score='#{scores[0]}',weekly_score='#{scores[1]}',monthly_score='#{scores[2]}',quarterly_score='#{scores[3]}',yearly_score='#{scores[4]}',all_score='#{scores[5]}' WHERE topic_id='#{i[3]}'"
+
+        # update user_actions table
+        #@con.exec "INSERT INTO user_actions (action_type, user_id, target_topic_id, target_post_id, acting_user_id, created_at, updated_at) VALUES ('1', '#{i[2]}', '#{i[3]}', '#{i[0]}', '#{i[2]}', '#{i[5]}', '#{i[5]}')"
+        #@con.exec "INSERT INTO user_actions (action_type, user_id, target_topic_id, target_post_id, acting_user_id, created_at, updated_at) VALUES ('2', '#{i[1]}', '#{i[3]}', '#{i[0]}', '#{i[2]}', '#{i[5]}', '#{i[5]}')"
+
+        # update user_stats table
+        #@con.exec "UPDATE user_stats SET likes_given=1 WHERE user_id='#{i[2]}'"
+        #@con.exec "UPDATE user_stats SET likes_received=1 WHERE user_id='#{i[1]}'"
+
+
       end
     end
   end
