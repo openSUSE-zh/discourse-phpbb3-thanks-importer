@@ -9,6 +9,6 @@ config = ARGV[0] || "config"
 mysql = ThanksMod::DB.new(config).mysql2
 pg = ThanksMod::DB.new(config).pg
 
-thanks_data = ThanksMod::Pool.new(mysql).get
+thanks_data = ThanksMod::PHPBB.new(mysql).get
 
 mapped = ThanksMod::Map.new(pg, thanks_data).write

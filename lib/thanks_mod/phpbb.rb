@@ -1,6 +1,6 @@
 module ThanksMod
   # extract thanks from phpbb3 mysql database
-  class Pool
+  class PHPBB
     def initialize(con)
       @con = con
     end
