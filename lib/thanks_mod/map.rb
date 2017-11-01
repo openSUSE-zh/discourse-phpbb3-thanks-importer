@@ -3,26 +3,12 @@ module ThanksMod
   class Map
     def initialize(con, data)
       @con = con
-      @data = map(data)
+      @data = data
     end
 
-    def write
-      open('mapped.txt', 'w:UTF-8') do |f|
-        @data.each do |i|
-          f.write "#{i}\n"
-        end
-      end
-    end
-
-    def get
-      @data
-    end
-
-    private
-
-    def map(data)
+    def map
       # map the thanks data with the IDs in the postgresql db
-      data.map! do |i|
+      @data.map! do |i|
         # post_text, poster_id, user_id, thanks_time
         post_id = get_post_id(i[0])
         receiver = get_user_id(i[1])
@@ -32,6 +18,8 @@ module ThanksMod
         [post_id, receiver, giver, topic_id, category_id, i[3]]
       end
     end
+
+    private
 
     def get_post_id(id)
       ids = @con.exec "SELECT post_id FROM post_custom_fields WHERE name='import_id' AND value=\'#{id}\'"

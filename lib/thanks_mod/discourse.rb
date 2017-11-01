@@ -16,8 +16,8 @@ module ThanksMod
         like_score = post_calculator.like_score
         score = post_calculator.score(like_score)
         @con.exec "UPDATE posts SET like_count='#{like_count}', like_score='#{like_score}', score='#{score}' WHERE id='#{i[0]}'"
-        post_num = @con.exec("SELECT post_number FROM posts WHERE id='#{i[0]}'")[0]['post_number']
-        @con.exec "UPDATE badge_posts SET like_count='#{like_count}', like_score='#{like_score}', score='#{score}' WHERE topic_id='#{i[3]}' AND post_number='#{post_num}'"
+#        post_num = @con.exec("SELECT post_number FROM posts WHERE id='#{i[0]}'")[0]['post_number']
+ #       @con.exec "UPDATE badge_posts SET like_count='#{like_count}', like_score='#{like_score}', score='#{score}' WHERE topic_id='#{i[3]}' AND post_number='#{post_num}'"
         pr = post_calculator.percent_rank
         @con.exec "UPDATE posts SET percent_rank='#{pr}' WHERE id='#{i[0]}'"
 
